@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router";
 
 interface ProductCardProps {
   id: string;
@@ -16,8 +17,13 @@ export const ProductCard = ({
   image,
   category,
 }: ProductCardProps) => {
+  const navigation = useNavigate();
+
   return (
-    <Card className="group border-0 shadow-none product-card-hover cursor-pointer">
+    <Card
+      className="group border-0 shadow-none product-card-hover cursor-pointer"
+      onClick={() => navigation(`/product/${id}`)}
+    >
       <CardContent className="p-0">
         <div className="relative aspect-square overflow-hidden bg-muted rounded-lg">
           <img
@@ -42,6 +48,10 @@ export const ProductCard = ({
               size="sm"
               variant="outline"
               className="opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground border-primary/20 text-xs px-4 py-2 h-8"
+              onClick={(e) => {
+                e.stopPropagation();
+                console.log("Agregado al carrito");
+              }}
             >
               Agregar al carrito
             </Button>
