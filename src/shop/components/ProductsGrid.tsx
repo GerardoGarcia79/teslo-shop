@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
 import { FilterSidebar } from "./FilterSidebar";
 
-import { type Product } from "@/mocks/products.mock";
+import type { Product } from "@/interfaces/product.interface";
 
 import { Filter, Grid, List } from "lucide-react";
 
@@ -103,10 +103,11 @@ export const ProductsGrid = ({ products }: Props) => {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  name={product.name}
+                  name={product.title}
                   price={product.price}
-                  image={product.image}
-                  category={product.category}
+                  image={product.images[0] || "https://placehold.co/600x400"}
+                  category={product.gender}
+                  sizes={product.sizes}
                 />
               ))}
             </div>

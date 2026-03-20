@@ -49,10 +49,10 @@ export const Header = () => {
               Todos
             </Link>
             <Link
-              to="/gender/man"
+              to="/gender/men"
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                gender === "man" ? "underline underline-offset-4" : "",
+                gender === "men" ? "underline underline-offset-4" : "",
               )}
             >
               Hombres
