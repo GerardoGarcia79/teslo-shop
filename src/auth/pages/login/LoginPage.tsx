@@ -8,11 +8,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/custom/Logo";
-import { loginAction } from "@/auth/actions/login.action";
+import { useAuthStore } from "@/auth/store/auth.store";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
   const [isPosting, setIsPosting] = useState(false);
+  const { login } = useAuthStore();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,17 +23,14 @@ export const LoginPage = () => {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    try {
-      const data = await loginAction(email, password);
-      localStorage.setItem("token", data.token);
-      console.log("Re-direccionando al home");
+    const isValid = await login(email, password);
+
+    if (isValid) {
       navigate("/");
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      toast.error("Correo y/o contraseña no validos");
-    } finally {
-      setIsPosting(false);
+      return;
     }
+    toast.error("Correo y/o contraseña no validos");
+    setIsPosting(false);
   };
 
   return (
