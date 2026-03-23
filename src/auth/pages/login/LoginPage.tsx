@@ -7,11 +7,21 @@ import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/custom/Logo";
 
 export const LoginPage = () => {
+  const handleLogin = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    console.log({ email, password });
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <Logo />
@@ -24,6 +34,7 @@ export const LoginPage = () => {
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="m@example.com"
                   required
                 />
@@ -41,6 +52,7 @@ export const LoginPage = () => {
                 <Input
                   id="password"
                   type="password"
+                  name="password"
                   required
                   placeholder="Contraseña"
                 />
