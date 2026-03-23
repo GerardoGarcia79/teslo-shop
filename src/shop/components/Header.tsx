@@ -7,10 +7,12 @@ import { Input } from "@/components/ui/input";
 
 import { Search } from "lucide-react";
 import { Logo } from "@/components/custom/Logo";
+import { useAuthStore } from "@/auth/store/auth.store";
 
 export const Header = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { gender } = useParams();
+  const { user, logout } = useAuthStore();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const query = searchParams.get("query") || "";
@@ -96,11 +98,22 @@ export const Header = () => {
               <Search className="h-5 w-5" />
             </Button>
 
-            <Link to="/auth/login">
-              <Button variant="default" size="sm" className="ml-2">
-                Login
+            {!user ? (
+              <Link to="/auth/login">
+                <Button variant="default" size="sm" className="ml-2">
+                  Login
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                className="ml-2"
+                onClick={logout}
+              >
+                Cerrar sesión
               </Button>
-            </Link>
+            )}
 
             <Link to="/admin">
               <Button variant="destructive" size="sm" className="ml-2">
