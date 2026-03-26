@@ -27,9 +27,10 @@ export const LoginPage = () => {
 
     if (isValid) {
       navigate("/");
+      setIsPosting(false);
       return;
     }
-    toast.error("Correo y/o contraseña no validos");
+    toast.error("Correo y/o contraseña no válidos");
     setIsPosting(false);
   };
 
