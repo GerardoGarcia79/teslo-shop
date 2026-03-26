@@ -13,7 +13,10 @@ type AuthState = {
   token: string | null;
   authStatus: AuthStatus;
   userInitials: string;
+
   // Getters
+  isAdmin: () => boolean;
+
   // Actions
   setUserInitials: (user: User | null) => void;
   login: (email: string, password: string) => Promise<boolean>;
@@ -30,13 +33,20 @@ const computeUserInitials = (user: User | null): string => {
     .join("");
 };
 
-export const useAuthStore = create<AuthState>()((set) => ({
+export const useAuthStore = create<AuthState>()((set, get) => ({
   // Properties
   user: null,
   token: null,
   authStatus: "checking",
   userInitials: "",
+
   // Getters
+  isAdmin: () => {
+    const roles = get().user?.roles || [];
+
+    return roles.includes("admin");
+    // return !!get().user?.roles.includes("admin");
+  },
 
   // Actions
   setUserInitials: (user) => {
