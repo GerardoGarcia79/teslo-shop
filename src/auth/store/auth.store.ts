@@ -109,6 +109,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
         user: null,
         token: null,
         authStatus: "not-authenticated",
+        userInitials: "",
       });
 
       return false;
