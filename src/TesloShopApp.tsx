@@ -10,7 +10,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "sonner";
 
 import { appRouter } from "./app.router";
-// import { checkAuthAction } from "./auth/actions/check-auth.action";
 import { FullScreenLoading } from "./components/custom/FullScreenLoading";
 import { useAuthStore } from "./auth/store/auth.store";
 
