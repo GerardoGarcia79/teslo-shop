@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Link, Navigate } from "react-router";
 
+import { useProduct } from "@/admin/hooks/useProduct";
 import { AdminTitle } from "@/admin/components/AdminTitle";
 import { Button } from "@/components/ui/button";
+import { FullScreenLoading } from "@/components/custom/FullScreenLoading";
 
 import { X, Plus, Upload, Tag, SaveAll } from "lucide-react";
 
@@ -21,6 +23,8 @@ interface Product {
 
 export const AdminProductPage = () => {
   const { id } = useParams();
+
+  const { isLoading, data: product2, isError } = useProduct(id || "");
 
   const productTitle = id === "new" ? "Nuevo producto" : "Editar producto";
   const productSubtitle =
@@ -111,6 +115,10 @@ export const AdminProductPage = () => {
     const files = e.target.files;
     console.log(files);
   };
+
+  if (isError) return <Navigate to="/admin/products" />;
+
+  if (isLoading) return <FullScreenLoading />;
 
   return (
     <>
