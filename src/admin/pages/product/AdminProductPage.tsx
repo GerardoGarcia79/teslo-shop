@@ -7,7 +7,12 @@ import { ProductForm } from "./ui/ProductForm";
 export const AdminProductPage = () => {
   const { id } = useParams();
 
-  const { isLoading, data: product, isError } = useProduct(id || "");
+  const {
+    isLoading,
+    data: product,
+    isError,
+    handleSubmitForm,
+  } = useProduct(id || "");
 
   const title = id === "new" ? "Nuevo producto" : "Editar producto";
   const subtitle =
@@ -23,5 +28,12 @@ export const AdminProductPage = () => {
     return <Navigate to="/admin/products" />;
   }
 
-  return <ProductForm title={title} subtitle={subtitle} product={product} />;
+  return (
+    <ProductForm
+      title={title}
+      subtitle={subtitle}
+      product={product}
+      onSubmit={handleSubmitForm}
+    />
+  );
 };
