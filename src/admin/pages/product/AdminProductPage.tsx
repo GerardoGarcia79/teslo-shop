@@ -48,6 +48,7 @@ export const AdminProductPage = () => {
       subtitle={subtitle}
       product={product}
       onSubmit={handleSubmit}
+      isPosting={mutation.isPending}
     />
   );
 };
