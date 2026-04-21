@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
@@ -48,7 +48,11 @@ export const ProductForm = ({
     defaultValues: product,
   });
 
-  // eslint-disable-next-line react-hooks/incompatible-library
+  useEffect(() => {
+    setValue("files", []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
+
   const selectedSizes = watch("sizes");
   const selectedTags = watch("tags");
   const currentStock = watch("stock");
