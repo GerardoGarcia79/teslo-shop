@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { type Product, products } from "@/mocks/products.mock";
 
 interface ProductPageProps {
-  product: Product;
+  product?: Product;
   onAddToCart?: (product: Product, size: string, color: string) => void;
 }
 
